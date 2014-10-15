@@ -1,0 +1,6 @@
+#!/bin/bash
+notify-send "Picture $1 uploading to Imgur!"
+res=$(curl -sH "Authorization: Client-ID 3e7a4deb7ac67da" -F "image=@$1" "https://api.imgur.com/3/upload"| sed -e 's/.*"link":"\([^"]*\).*/\1/' -e 's/\\//g')
+echo $res | xclip -sel clip
+notify-send "URL:  $res was copied to clipboard!"
+
